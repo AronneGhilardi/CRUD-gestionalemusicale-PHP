@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestione Dati Musicali</title>
+</head>
+<body>
+    <h2>Gestione Dati Musicali</h2>
+    <form action="dashboard.php" method="post">
+        <label for="azione">Azione:</label>
+        <select name="azione" id="azione">
+            <option value="aggiungi">Aggiungi</option>
+            <option value="modifica">Modifica</option>
+            <option value="elimina">Elimina</option>
+        </select><br><br>
+
+        <label for="entita">Entità:</label>
+        <select name="entita" id="entita">
+            <option value="brano">Brano</option>
+            <option value="album">Album</option>
+            <option value="artista">Artista</option>
+        </select><br><br>
+
+        <!-- Campi specifici per l'entità selezionata -->
+        <div id="campi_specifici"></div>
+
+        <input type="submit" value="Esegui">
+    </form>
+
+    <script>
+        // Aggiungi event listener per cambiamenti nella selezione dell'entità
+        document.getElementById("entita").addEventListener("change", function() {
+            var entita = this.value;
+            var campiSpecifici = document.getElementById("campi_specifici");
+            campiSpecifici.innerHTML = ""; // Pulisce i campi specifici al cambiare dell'entità
+
+            // Aggiunge i campi specifici in base all'entità selezionata
+            if (entita === "brano") {
+                campiSpecifici.innerHTML = `
+                    <label for="titolo">Titolo Brano:</label>
+                    <input type="text" id="titolo" name="titolo"><br><br>
+                    <!-- Altri campi specifici per il brano -->
+                `;
+            } else if (entita === "album") {
+                campiSpecifici.innerHTML = `
+                    <label for="titolo">Titolo Album:</label>
+                    <input type="text" id="titolo" name="titolo"><br><br>
+                    <!-- Altri campi specifici per l'album -->
+                `;
+            } else if (entita === "artista") {
+                campiSpecifici.innerHTML = `
+                    <label for="nome">Nome Artista:</label>
+                    <input type="text" id="nome" name="nome"><br><br>
+                    <!-- Altri campi specifici per l'artista -->
+                `;
+            }
+        });
+    </script>
+</body>
+</html>
